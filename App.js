@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import MapView from 'react-native-maps';
 import {Trucks} from './data';
 
@@ -8,8 +8,8 @@ export default class App extends React.Component {
     super();
     this.state = {
       region: {
-        latitude: 40.167945861816406,
-				longitude: 44.439117431640625,
+        latitude: 40.20109939575195,
+				longitude: 44.50162887573242,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }
@@ -25,8 +25,19 @@ export default class App extends React.Component {
            Trucks.map(truck => {
              return (
                <MapView.Marker
-                 key={truck.id}
-                 coordinate={{latitude: truck.positionLat, longitude: truck.positionLang}}
+                 key={truck.orderId}
+                 coordinate={{latitude: truck.oroginLat, longitude: truck.originLng}}
+               />
+             )
+           })
+         }
+         {
+           Trucks.map(truck => {
+             return (
+               <MapView.Marker
+                 key={truck.orderId}
+                 pinColor="blue"
+                 coordinate={{latitude: truck.destLat, longitude: truck.destLng}}
                />
              )
            })
@@ -39,5 +50,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
 	map: {
 		...StyleSheet.absoluteFillObject,
-	}
+	},
 });
